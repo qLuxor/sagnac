@@ -132,8 +132,8 @@ def psi_Kolonderski(lp,ls,li,wp,ws,wi,axp,axs,axi):
 # Integrale usando le funzioni di scipy: eterno
     return integ.nquad(func_Kolonderski,[[-np.inf,np.inf],[-np.inf,np.inf],[-np.inf,np.inf],[-np.inf,np.inf]],args=(lp,ls,li,wp,ws,wi,axp,axs,axi))
 
-#%% Kolonderski paraxial
-def func_Kolonderski(ksx,ksy,kix,kiy,lp,ls,li,wp,ws,wi,axp,axs,axi):
+#%% Kolonderski
+def func_Kolonderski_full(ksx,ksy,kix,kiy,lp,ls,li,wp,ws,wi,axp,axs,axi):
     omega_p = lambda2omega(lp)
     omega_s = lambda2omega(ls)
     omega_i = lambda2omega(li)
@@ -147,7 +147,7 @@ def func_Kolonderski(ksx,ksy,kix,kiy,lp,ls,li,wp,ws,wi,axp,axs,axi):
     return wp*ws*wi*np.exp(-ws**2/2*(ksx**2 + ksy**2) - wi**2/2*(kix**2+kiy**2) - wp**2/2*(kpx**2+kpy**2)) * np.sinc(L/2*(kpz - ksz - kiz + 2*np.pi/Lambda))
 
 
-def psi_Kolonderski(lp,ls,li,wp,ws,wi,axp,axs,axi):
+def psi_Kolonderski_full(lp,ls,li,wp,ws,wi,axp,axs,axi):
 # Integrale come somma; non funziona
 #    (ksx,dksx) = (ksy,dksy) = (kix,dkix) = (kiy,dkiy) = np.linspace(-1000000,1000000,50,retstep=True)
 #    
@@ -156,6 +156,8 @@ def psi_Kolonderski(lp,ls,li,wp,ws,wi,axp,axs,axi):
 # Integrale usando le funzioni di scipy: eterno
     return integ.nquad(func_Kolonderski,[[-np.inf,np.inf],[-np.inf,np.inf],[-np.inf,np.inf],[-np.inf,np.inf]],args=(lp,ls,li,wp,ws,wi,axp,axs,axi))
 
+# Kolonderski paraxial
+def func_Kolonderski(lp,ls,li,wp,ws,wi,axp,axs,axi)
 
 #%% Phasematching
 li = ls = np.arange(809.9e-9,810.1e-9,1e-12)
