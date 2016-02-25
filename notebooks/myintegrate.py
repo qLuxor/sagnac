@@ -6,7 +6,8 @@ Created on Wed Feb 24 14:54:48 2016
 """
 
 import numpy as np
-import scipy.integrate as integ
+#import scipy.integrate as integ
+#from mpmath import quad
 
 N = 10000
 
@@ -43,14 +44,20 @@ N = 10000
 #        return real_int + 1j*imag_int
 
 def complex_integral(func,a,b,args):
+    ''' Complex integration using extended trapezoidal rule'''
     real_func = lambda z: np.real(func(z,*args))
     imag_func = lambda z: np.imag(func(z,*args))
     Npoints = N
     z,dz = np.linspace(a,b,Npoints,retstep=True)
-    real_int = np.sum(real_func(z))*dz
-    imag_int = np.sum(imag_func(z))*dz
+    real_int = np.sum(real_func(z))*dz-(real_func(a)+real_func(b))/2*dz
+    imag_int = np.sum(imag_func(z))*dz-(imag_func(a)+imag_func(b))/2*dz
 #        real_int = integ.romb(real_func(z),dz)
 #        imag_int = integ.romb(imag_func(z),dz)
 #        print(real_int)
 #        print(imag_int)
     return real_int + 1j*imag_int
+
+
+#def complex_integral(func,a,b,args):
+#    integrand = lambda z: func(z,*args)
+#    return quad(integrand,[a,b])

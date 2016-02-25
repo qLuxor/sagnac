@@ -28,5 +28,5 @@ def func(z,lp,ls,li,wp,ws,wi,axp,axs,axi,Lambda):
     return wp*ws*wi*np.exp(1j*( (n(lp,axp)*omega_p - n(ls,axs)*omega_s - n(li,axi)*omega_i)/c + 2*np.pi/Lambda )*z) / (np.conj(qs(z))*np.conj(qi(z)) + qp(z)*np.conj(qi(z)) + qp(z)*np.conj(qs(z)))
 #    return wp*ws*wi / (np.conj(qs(z))*np.conj(qi(z)) + qp(z)*np.conj(qi(z)) + qp(z)*np.conj(qs(z)))
 
-def psi(lp,ls,li,wp,ws,wi,axp,axs,axi,L,Lambda,intype):
+def psi(lp,ls,li,wp,ws,wi,axp,axs,axi,L,Lambda):
     return complex_integral(func,-L/2,L/2,(lp,ls,li,wp,ws,wi,axp,axs,axi,Lambda))
