@@ -9,7 +9,7 @@ import numpy as np
 #import scipy.integrate as integ
 #from mpmath import quad
 
-N = 10000
+N = 5e5
 
 #def complex_integral(func,a,b,args,intype='stupid'):
 #    real_func = lambda z: np.real(func(z,*args))

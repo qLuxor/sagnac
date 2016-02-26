@@ -32,14 +32,14 @@ lp = 405e-9
 #%% Phasematching
 li = ls = np.arange(809.9e-9,810.1e-9,5e-12)
 #psi1 = np.zeros((ls.size,li.size))
-Ns = np.array([5e4,1e5,5e5])
+Ns = np.array([5e5,])
 
 psi = np.zeros((Ns.size,ls.size,li.size))
 
 #t0 = time.time()
 #for i in range(ls.size):
 #    for j in range(li.size):
-#        psi[j,i] = np.abs(psi_Bennink(1/(1/ls[i]+1/li[j]),ls[i],li[j],wp,ws,wi,axp,axs,axi,'stupid'))
+#        psi[j,i] = np.abs(B.O(1/(1/ls[i]+1/li[j]),ls[i],li[j],wp,ws,wi,axp,axs,axi,'stupid'))
 #t1 = time.time()
 #
 
@@ -50,7 +50,7 @@ for k in range(Ns.size):
     def int_cycle(i):
         loc = np.zeros(li.size)
         for j in range(li.size):
-            loc[j] = np.abs(B.psi(1/(1/ls[i]+1/li[j]),ls[i],li[j],wp,ws,wi,axp,axs,axi,L,Lambda))
+            loc[j] = np.abs(B.O(1/(1/ls[i]+1/li[j]),ls[i],li[j],wp,ws,wi,axp,axs,axi,L,Lambda))
         return loc
     
     r = Parallel(n_jobs=8)(delayed(int_cycle)(i) for i in range(ls.size))
