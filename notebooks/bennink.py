@@ -17,15 +17,15 @@ def func(z,lp,ls,li,wp,ws,wi,axp,axs,axi,Lambda):
     omega_i = lambda2omega(li)
     
     def qp(z):
-        return wp**2 + 1j*z*lp/np.pi/n(lp,axp)
+        return wp**2 + 1j*z*lp/np.pi/n(lp,axp,typ='christ')
 
     def qs(z):
-        return ws**2 + 1j*z*ls/np.pi/n(ls,axs)
+        return ws**2 + 1j*z*ls/np.pi/n(ls,axs,typ='christ')
         
     def qi(z):
-        return wi**2 + 1j*z*li/np.pi/n(li,axi)
+        return wi**2 + 1j*z*li/np.pi/n(li,axi,typ='christ')
     
-    return wp*ws*wi*np.exp(1j*( (n(lp,axp)*omega_p - n(ls,axs)*omega_s - n(li,axi)*omega_i)/c + 2*np.pi/Lambda )*z) / (np.conj(qs(z))*np.conj(qi(z)) + qp(z)*np.conj(qi(z)) + qp(z)*np.conj(qs(z)))
+    return wp*ws*wi*np.exp(1j*( (n(lp,axp,typ='christ')*omega_p - n(ls,axs,typ='christ')*omega_s - n(li,axi,typ='christ')*omega_i)/c + 2*np.pi/Lambda )*z) / (np.conj(qs(z))*np.conj(qi(z)) + qp(z)*np.conj(qi(z)) + qp(z)*np.conj(qs(z)))
 #    return wp*ws*wi / (np.conj(qs(z))*np.conj(qi(z)) + qp(z)*np.conj(qi(z)) + qp(z)*np.conj(qs(z)))
 
 def O(lp,ls,li,wp,ws,wi,axp,axs,axi,L,Lambda):
