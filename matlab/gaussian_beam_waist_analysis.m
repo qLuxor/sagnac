@@ -1,7 +1,8 @@
 clear all; % clear all variables
 close all; % close all plots
 
-files=dir('d*.bmp');
+datapath = '../../../data/focus/pump/f_200/';
+files=dir([datapath '*.bmp']);
 
 %% Process images
 for i=1:length(files)
@@ -12,7 +13,7 @@ for i=1:length(files)
     L(i)=str2num(filecurr(2:4))/1000;
 
     % apply gaussian filter and normalize
-    fig=imread(filecurr);
+    fig=imread([datapath filecurr]);
     fig1=double(fig);%rgb2gray(fig);
     PSF = fspecial('gaussian',15,5);
     fig2 = imfilter(fig1,PSF,'conv');
@@ -81,16 +82,16 @@ save('data','L','Wx','Wy');
 %% fit waists
 close all;
 figure()
-lambda = 810e-9;
+lambda = 405e-9;
 x=0:0.001:0.4;
 wai=@(x,par)par(1).*sqrt(1+((x-par(2)).*lambda./(pi.*par(1).^2)).^2);
 par0=[1e-5,-0.2];       
 [varWX,chi]=fminsearch(@(par)sum((wai(L,par)-Wx).^2),par0);
-plot(L,Wx,'+',x,wai(x,varWX));
+plot(L,Wx,'+r',x,wai(x,varWX),'r');
 text(0,0,['$W_{0X}$=' num2str(varWX(1))],'Interpreter','latex','FontSize',20);
 hold on
 [varWY,chi]=fminsearch(@(par)sum((wai(L,par)-Wy).^2),par0);
-plot(L,Wy,'x',x,wai(x,varWY))
+plot(L,Wy,'xb',x,wai(x,varWY),'b')
 text(0,1e-4,['$W_{0Y}$=' num2str(varWY(1))],'Interpreter','latex','FontSize',20);
 ylabel('Waist','FontSize',20);
 xlabel('L(m)','FontSize',20);
