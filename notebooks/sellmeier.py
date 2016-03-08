@@ -50,7 +50,7 @@ def n_Kato(l,axis):
     return n
 
 
-def n(l,axis,T=20,typ='kato'):
+def n(l,axis,T=20,typ='christ'):
     ''' Returns the value of the refractive index along the axis at wavelength l
         and temperature T, using the equations derived from Kato-Takaoka (if 
         typ == 'kato') or those found in the thesis of A. Christ (if typ == 'christ').'''
