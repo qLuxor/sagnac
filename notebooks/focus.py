@@ -59,7 +59,7 @@ for i in range(len(f_asph)):
 print('Single aspheric lens')
 print('MFD =',MFD*1e6,'um')
 
-W01 = 60e-6
+W01 = 47e-6
 
 M = W01/W0
 z0 = pi*W0**2/wavelength
