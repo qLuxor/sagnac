@@ -37,7 +37,6 @@ nominal_f = (50,75,100,125,200,250,300,500,750,1000)
 
 for i in range(len(f_asph)):
     lns = Lens(f_asph[i],wavelength)
-    
     z = f_asph[i]
     
     W01,z1 = lns.propagate(W0,z)
@@ -59,7 +58,9 @@ for i in range(len(f_asph)):
 print('Single aspheric lens')
 print('MFD =',MFD*1e6,'um')
 
-W01 = 60e-6
+W01 = 47e-6
+W01 = 30e-6
+print('Bennink xi =',0.03*wavelength/(2*pi*ppktp.n(wavelength,'y',T=20)*W01**2))
 
 M = W01/W0
 z0 = pi*W0**2/wavelength
@@ -70,3 +71,4 @@ for i in range(len(f_asph)):
     print('Collimator:',model[i])
     print('Distance lens-fiber:',z*1e3,'mm')
     print('Distance lens-crystal:',z1*1e3,'mm')
+    print('Beam radius at lens:',W0*np.sqrt(1+(z/z0)**2)*1e3,'mm with lens radius',5.50/2,'mm')
