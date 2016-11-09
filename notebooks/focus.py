@@ -59,7 +59,7 @@ print('Single aspheric lens')
 print('MFD =',MFD*1e6,'um')
 
 W01 = 47e-6
-W01 = 30e-6
+#W01 = 30e-6
 print('Bennink xi =',0.03*wavelength/(2*pi*ppktp.n(wavelength,'y',T=20)*W01**2))
 
 M = W01/W0
